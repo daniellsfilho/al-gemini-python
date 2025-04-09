@@ -10,12 +10,6 @@ ai.configure(api_key=CHAVE_API_GOOGLE)
 MODELO_FLASH = "gemini-2.0-flash"
 MODELO_PRO = "gemini-1.5-pro"
 
-CUSTO_ENTRADA_FLASH = 0.075
-CUSTO_SAIDA_FLASH = 0.30
-
-CUSTO_ENTRADA_PRO = 3.5
-CUSTO_SAIDA_PRO = 10.50
-
 ai_flash = ai.get_model(f"models/{MODELO_FLASH}")
 ai_pro = ai.get_model(f"models/{MODELO_PRO}")
 
@@ -31,3 +25,18 @@ limites_token_pro = {
 
 print(f"limites de tokens flash: {limites_token_flash}")
 print(f"limites de tokens pro: {limites_token_pro}")
+print("")
+
+llm_flash = ai.GenerativeModel(
+    model_name=MODELO_FLASH
+)
+
+llm_pro = ai.GenerativeModel(
+    model_name=MODELO_PRO
+)
+
+qtd_tokens_flash = llm_flash.count_tokens("O que é uma hq de capa dura?")
+print(f"A quantidade de tokens para flash é: {qtd_tokens_flash}")
+
+qtd_tokens_pro = llm_pro.count_tokens("O que é uma hq de capa dura?")
+print(f"A quantidade de tokens para pro é: {qtd_tokens_flash}")
